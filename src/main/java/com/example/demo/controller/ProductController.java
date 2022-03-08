@@ -1,11 +1,20 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.CommonResponse;
+import com.example.demo.dto.ProductDto;
+import com.example.demo.service.ProductService;
+
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/api/v1/product")
 public class ProductController {
+    private final ProductService productService;
+    
+    //generate constructor
+    public ProductController(ProductService productService) {
+        this.productService = productService;
+    }
 
     @GetMapping("")
     public CommonResponse getProducts() {
@@ -20,8 +29,9 @@ public class ProductController {
     }
 
     @PostMapping("")
-    public CommonResponse addProduct() {
+    public CommonResponse addProduct(@RequestBody ProductDto productDto) {
         //TODO: Add code to post here
+        productService.add(productDto);
         return new CommonResponse("Successfully add new product");
     }
 
