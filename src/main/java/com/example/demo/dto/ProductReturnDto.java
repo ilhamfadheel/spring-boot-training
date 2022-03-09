@@ -1,47 +1,59 @@
-package com.example.demo.Entity;
+package com.example.demo.dto;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import com.example.demo.Entity.ProductEntity;
 
-@Entity
-public class ProductEntity {
-    @Id
-    @GeneratedValue
-    private long id;
+public class ProductReturnDto {
     private String name;
     private long stock;
     private long price;
     private String desc;
 
-    public long getId() {
-        return id;
+    //generate constructor
+    public ProductReturnDto(ProductEntity entity) {
+        this.name = entity.getName();
+        this.stock = entity.getStock();
+        this.price = entity.getPrice();
+        this.desc = entity.getDesc();
     }
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
+    /**
+     * @return String return the name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * @param name the name to set
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * @return long return the stock
+     */
     public long getStock() {
         return stock;
     }
 
+    /**
+     * @param stock the stock to set
+     */
     public void setStock(long stock) {
         this.stock = stock;
     }
 
+    /**
+     * @return long return the price
+     */
     public long getPrice() {
         return price;
     }
 
+    /**
+     * @param price the price to set
+     */
     public void setPrice(long price) {
         this.price = price;
     }

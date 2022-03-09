@@ -4,13 +4,7 @@ public class ProductDto {
     private String productName;
     private Long price;
     private Long stock;
-
-    // Inject constructor
-    public ProductDto(String productName, Long price, Long stock) {
-        this.productName = productName;
-        this.price = price;
-        this.stock = stock;
-    }
+    private String desc;
 
     /**
      * @return String return the productName
@@ -52,6 +46,21 @@ public class ProductDto {
      */
     public void setStock(Long stock) {
         this.stock = stock;
+    }
+
+
+    /**
+     * @return String return the desc
+     */
+    public String getDesc() {
+        return desc;
+    }
+
+    /**
+     * @param desc the desc to set
+     */
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 
 }

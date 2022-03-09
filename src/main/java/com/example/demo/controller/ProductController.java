@@ -1,10 +1,14 @@
 package com.example.demo.controller;
 
+import com.example.demo.Entity.ProductEntity;
 import com.example.demo.dto.CommonResponse;
 import com.example.demo.dto.ProductDto;
+import com.example.demo.dto.ProductReturnDto;
+import com.example.demo.dto.UpdateStockDto;
 import com.example.demo.service.ProductService;
-
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/v1/product")
@@ -17,33 +21,30 @@ public class ProductController {
     }
 
     @GetMapping("")
-    public CommonResponse getProducts() {
-        //TODO: Add code to get all product list here
-        return new CommonResponse("Dummy Products");
+    public List<ProductEntity> getProducts(@RequestParam(value = "Stock", defaultValue = "0") Long isInStock) {
+        return productService.fetch(isInStock);
     }
 
     @GetMapping("{id}")
-    public CommonResponse getProduct(@PathVariable("id") String id) {
-        //TODO: Add code to get product here
-        return new CommonResponse("Dummy Product");
+    public ProductReturnDto getProduct(@PathVariable("id") String id) {
+        ProductEntity entity = productService.getById(Long.parseLong(id));
+        return new ProductReturnDto(entity);
     }
 
     @PostMapping("")
     public CommonResponse addProduct(@RequestBody ProductDto productDto) {
-        //TODO: Add code to post here
         productService.add(productDto);
         return new CommonResponse("Successfully add new product");
     }
 
     @PutMapping("/stock")
-    public CommonResponse updateStock() {
-        //TODO: Add code to post here
-        return new CommonResponse("Successfully update stock");
+    public ProductEntity updateStock(@RequestBody UpdateStockDto request) {
+        return productService.updateStock(request);
     }
 
     @DeleteMapping("{id}")
     public CommonResponse deleteProduct(@PathVariable("id") String id) {
-        //TODO: Add code to get product list here
+        productService.delete(Long.parseLong(id));
         return new CommonResponse("Successfully delete product");
     }
 }
