@@ -5,11 +5,9 @@ import com.example.demo.dto.ProductDto;
 import com.example.demo.dto.UpdateStockDto;
 import com.example.demo.repository.ProductRepository;
 
-import org.hibernate.sql.Delete;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ProductService {
@@ -51,5 +49,9 @@ public class ProductService {
 
     public List<ProductEntity> fetch(Long isInStock){
         return productRepository.findByStockGreaterThan(isInStock);
+    }
+
+    public List<ProductEntity> fetchByPrice(Long price) {
+        return productRepository.findByPriceLessThanEqual(price);
     }
 }

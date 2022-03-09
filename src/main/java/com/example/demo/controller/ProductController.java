@@ -20,16 +20,23 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @GetMapping("")
-    public List<ProductEntity> getProducts(@RequestParam(value = "Stock", defaultValue = "0") Long isInStock) {
-        return productService.fetch(isInStock);
-    }
+//    @GetMapping("")
+//    public List<ProductEntity> getProducts(@RequestParam(value = "Stock", defaultValue = "0") Long isInStock) {
+//        return productService.fetch(isInStock);
+//    }
 
     @GetMapping("{id}")
     public ProductReturnDto getProduct(@PathVariable("id") String id) {
         ProductEntity entity = productService.getById(Long.parseLong(id));
         return new ProductReturnDto(entity);
     }
+
+    //get available product under certain price
+    @GetMapping("")
+    public List<ProductEntity> getByPrice(@RequestParam(value = "Price", defaultValue = "0") Long price) {
+        return productService.fetchByPrice(price);
+    }
+
 
     @PostMapping("")
     public CommonResponse addProduct(@RequestBody ProductDto productDto) {

@@ -9,7 +9,9 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ProductRepository extends CrudRepository<ProductEntity, Long> {
-    //JPA MAgic
+    //JPA Magic
     //JPQL magic
     List<ProductEntity> findByStockGreaterThan(long jumlah);
+    //JPA Magic
+    List<ProductEntity> findByPriceLessThanEqual(Long price);
 }
